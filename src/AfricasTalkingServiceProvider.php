@@ -3,6 +3,7 @@
 namespace NotificationChannels\AfricasTalking;
 
 use AfricasTalking\SDK\AfricasTalking as AfricasTalkingSDK;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\ServiceProvider;
 use NotificationChannels\AfricasTalking\Exceptions\InvalidConfiguration;
 
@@ -13,6 +14,9 @@ class AfricasTalkingServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Notification::extend('africastalking', function ($app) {
+            return $app->make(AfricasTalkingChannel::class);
+        });
         /**
          * Bootstrap the application services.
          */
